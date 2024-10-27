@@ -11,6 +11,7 @@ import androidx.core.app.NotificationManagerCompat
 import io.github.edsuns.adblockclient.sample.main.MainActivity
 import io.github.edsuns.adblockclient.sample.settings.SettingsActivity
 import io.github.edsuns.adfilter.AdFilter
+import io.github.edsuns.smoothprogress.BuildConfig
 import timber.log.Timber
 
 /**
@@ -42,7 +43,7 @@ class App : Application() {
         val intent = Intent(this, clazz).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val builder = NotificationCompat.Builder(this, channelId).apply {
             setContentTitle(getString(R.string.filter_download))

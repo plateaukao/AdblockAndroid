@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
             this,
             binding.menuButton,
             Gravity.NO_GRAVITY,
-            R.attr.actionOverflowMenuStyle,
-            0
         )
         popupMenu.inflate(R.menu.menu_main)
         popupMenu.setOnMenuItemClickListener {
@@ -60,6 +58,7 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
                 R.id.menuForward -> webView.goForward()
                 R.id.menuSettings ->
                     startActivity(Intent(this, SettingsActivity::class.java))
+
                 else -> finish()
             }
             true
@@ -226,9 +225,11 @@ class MainActivity : AppCompatActivity(), WebViewClientListener {
             !isFilterOn() && !filterViewModel.isCustomFilterEnabled() -> {
                 binding.countText.text = getString(R.string.off)
             }
+
             viewModel.dirtyBlockingInfo -> {
                 binding.countText.text = getString(R.string.count_none)
             }
+
             else -> {
                 val blockedUrlMap =
                     viewModel.blockingInfoMap.value?.get(viewModel.currentPageUrl.value)?.blockedUrlMap
